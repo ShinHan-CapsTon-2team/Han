@@ -1,0 +1,42 @@
+[
+    {
+        "questions": "1",
+        "options": [
+            {
+                "type":"a",
+                "img":".././Images/wedding1.png"
+            },
+            {
+                "type":"b",
+                "img":".././Images/wedding2.png"
+            }
+        ]
+        },
+    {
+            "questions": "2",
+            "options": [
+                {
+                    "type":"a",
+                    "img":".././Images/wedding3.png"
+                },
+                {
+                    "type":"b",
+                    "img":".././Images/wedding4.png"
+                }
+            ]
+    },
+
+    {
+        "questions": "3",
+        "options": [
+            {
+                "type":"a",
+                "img":".././Images/wedding5.png"
+            },
+            {
+                "type":"b",
+                "img":".././Images/wedding6.png"
+            }
+        ]
+    }
+]

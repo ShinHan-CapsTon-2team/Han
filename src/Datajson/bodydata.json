@@ -1,0 +1,42 @@
+[
+    {
+        "questions": "1",
+        "options": [
+            {
+                "type":"a",
+                "img":".././Images/image34.png"
+            },
+            {
+                "type":"b",
+                "img":".././Images/image35.png"
+            }
+        ]
+        },
+    {
+            "questions": "2",
+            "options": [
+                {
+                    "type":"a",
+                    "img":".././Images/image36.png"
+                },
+                {
+                    "type":"b",
+                    "img":".././Images/image37.png"
+                }
+            ]
+    },
+
+    {
+        "questions": "3",
+        "options": [
+            {
+                "type":"a",
+                "img":".././Images/image38.png"
+            },
+            {
+                "type":"b",
+                "img":".././Images/image39.png"
+            }
+        ]
+    }
+]

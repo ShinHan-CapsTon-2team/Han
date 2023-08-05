@@ -1,0 +1,96 @@
+
+    .imagelogo {
+      width: 500px;
+      height: 200px;
+      left: 30px;
+      top: 30px;
+      position: absolute;
+    }
+
+    .image-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
+      position: absolute;
+      left: 21%;
+      top: 33%;
+      transform: translateY(-50%);
+    }
+    
+    .category-image {
+      width: 228.43px;
+      height: 58px;
+      margin-right: 30px;
+    }
+
+    .Rectangle1,
+    .Rectangle2,
+    .Rectangle3 {
+      width: 378px;
+      height: 482px;
+      position: absolute;
+      opacity: 0.90;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 31px;
+      border: 4px #3A76EF solid;
+      top: 70%;
+      bottom: -30%;
+      transform: translateY(-50%);
+    }
+
+    .Rectangle1 {
+      left: calc(50% - 730px);
+      background-image: url('../Images/partner1.jpg');
+      background-size: cover;
+    }
+
+    .Rectangle2 {
+      left: calc(50% - 180px);
+      background-image: url('../Images/partner2.jpg');
+      background-size: cover;
+    }
+
+    .Rectangle3 {
+      left: calc(50% - -370px);
+      background-image: url('../Images/partner3.jpg');
+      background-size: cover;
+    }
+
+    .pagination {
+      text-align: center;
+      position: relative;
+      bottom: -1100px;
+      padding: 50px;
+      right: 0%;
+    }
+    
+    .pagination_list {
+      display: flex;
+      display: inline-block;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .pagination_list li {
+      display: inline-block;
+      margin: 0 5px;
+    }
+    
+    .pagination_list li a {
+      text-decoration: none;
+      padding: 5px 10px;
+      color: #000;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    .pagination_list li a.active {
+      background-color: #3A76EF;
+      color: #fff;
+    }
+    
+ 
+    
+
