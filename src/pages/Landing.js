@@ -58,9 +58,10 @@ function Re_Landing(){
 
     const LogoImg = styled.img`
         @media (min-width: 1920px) and (max-width: 1080px) {} {
-         width: 80%;
+         width: 90%;
          height: 100%;
         }
+
         width: 55%;
         height: 274px; /* height 값에 px 단위를 추가하세요 */
         margin-top: 100px; /* marginTop -> margin-top */
@@ -75,6 +76,8 @@ function Re_Landing(){
         flex-direction: column;
         
         align-items: center;
+
+        
         
     `;
 
@@ -83,7 +86,10 @@ function Re_Landing(){
         height: auto;
         margin-bottom: 16px; /* marginBottom -> margin-bottom */
 
-        
+        @media (min-width: 1920px) and (max-width: 1080px) {} {
+            width: 100%;
+            height: 100%;
+           }
        
     `;
 

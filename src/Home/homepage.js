@@ -1,7 +1,7 @@
 //import React, { useState, useEffect } from 'react';
 //import { Link, useLocation } from 'react-router-dom';
 import { useNavigate  } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 //import React, { useEffect } from 'react';
 //import { useSearchParams } from 'react-router-dom';
 
@@ -137,50 +137,52 @@ const Homepage = () => {
   const [selectedCategory, setSelectedCategory] = useState('가족사진');
   const [pageNumber, setPageNumber] = useState(1);
   const limit = 10; // 한 페이지당 이미지 수 설정
-  
-  
-  useEffect(() => {
-     //컴포넌트가 마운트될 때 '가족사진' 데이터를 불러옵니다
-    handleCategorySelect('가족사진');
-  }, []); 
  
-  const handleGohomeClick = () => {
-    handleCategorySelect('가족사진');
-    //navigate('/home');
-
-};
-
   
-  const handleCategorySelect = (category, limit, offset) => {
-    //const queryString = new URLSearchParams({ category }).toString();
-    const queryString = new URLSearchParams({
-      category,
-      limit,
-      offset,
-    }).toString();
 
-    console.log('Category value:', category);
-    
-    
-    fetch(`http://localhost:4000/api/home/${category}?${queryString}`) // 요청
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json(); // 반환
-    })
-    .then((data) => {
-      setUsers(data); // 데이터 저장
-      console.log(data); // 받아온 데이터를 콘솔에 출력하거나 원하는 로직으로 처리합니다.
-      navigate(`/home?${queryString}`);
-      setSelectedCategory(category);
-    })
-    .catch((error) => {
-      // 오류 처리
-      console.error(error);
-    });
-    
-   };
+const handleCategorySelect = useCallback((category, limit, offset) => {
+  //const queryString = new URLSearchParams({ category }).toString();
+  const queryString = new URLSearchParams({
+    category,
+    limit,
+    offset,
+  }).toString();
+
+  console.log('Category value:', category);
+  
+  
+  fetch(`http://localhost:4000/api/home/${category}?${queryString}`) // 요청
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); // 반환
+  })
+  .then((data) => {
+    setUsers(data); // 데이터 저장
+    console.log(data); // 받아온 데이터를 콘솔에 출력하거나 원하는 로직으로 처리합니다.
+    navigate(`/home?${queryString}`);
+    setSelectedCategory(category);
+  })
+  .catch((error) => {
+    // 오류 처리
+    console.error(error);
+  });
+  
+ }, [navigate]);
+
+
+  useEffect(() => {
+    //컴포넌트가 마운트될 때 '가족사진' 데이터를 불러옵니다
+  handleCategorySelect('가족사진');
+  }, [handleCategorySelect]); 
+
+  const handleGohomeClick = () => {
+  handleCategorySelect('가족사진');
+  navigate('/home');
+
+  };
+
 
     const handleClick = (id) => {
      console.log('Clicked with id:', id); // 확인용
@@ -191,15 +193,6 @@ const Homepage = () => {
        console.error('Invalid id:', id);
      }
     };
-
-    //const location = useLocation();
-    //const params = new URLSearchParams(location.search);
-
- // const [searchParams, setSearchParams] = useSearchParams();
-  
- // const offset = searchParams.get('offset');
-  //const limit = searchParams.get('limit');
-  //const [posts, setPosts] = useState([]);
 
   
    
