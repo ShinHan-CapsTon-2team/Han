@@ -1,6 +1,6 @@
 //import React, { useState, useEffect } from 'react';
 //import { Link, useLocation } from 'react-router-dom';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import React, { useCallback, useEffect, useState } from 'react';
 //import React, { useEffect } from 'react';
 //import { useSearchParams } from 'react-router-dom';
@@ -174,13 +174,16 @@ const handleCategorySelect = useCallback((category, limit, offset) => {
 
   useEffect(() => {
     //컴포넌트가 마운트될 때 '가족사진' 데이터를 불러옵니다
-  handleCategorySelect('가족사진');
-  }, [handleCategorySelect]); 
+    //handleCategorySelect('가족사진');
+    const initialOffset = (pageNumber - 1) * limit;
+    handleCategorySelect(selectedCategory, limit, initialOffset);
+    
+  }, [handleCategorySelect, selectedCategory, pageNumber, limit]); 
 
   const handleGohomeClick = () => {
   handleCategorySelect('가족사진');
   navigate('/home');
-
+  
   };
 
 
@@ -199,9 +202,8 @@ const handleCategorySelect = useCallback((category, limit, offset) => {
     const movePage = (pageNumber) => {
       const newPageNumber = Math.max(1, pageNumber);
       setPageNumber(newPageNumber);
-      const offset = (pageNumber - 1) * limit;
+      const offset = (newPageNumber - 1) * limit;
       handleCategorySelect(selectedCategory, limit, offset);
-      //console.log(pageNumber);
     };
 
   
