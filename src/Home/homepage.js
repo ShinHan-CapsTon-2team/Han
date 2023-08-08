@@ -12,6 +12,7 @@ import profile from '../Images/image 12.png';
 import wedding from '../Images/image 11.png';
 import body from '../Images/image 9.png';
 import styled from "styled-components";
+import plus from '../Images/plus.png';
 
 
 const categoriesData = [
@@ -98,6 +99,10 @@ const handleCategorySelect = useCallback((category, limit, offset) => {
       handleCategorySelect(selectedCategory, limit, offset);
     };
 
+      const goToWorkUpload = () => {
+        navigate('/post');
+      };
+
   
   return (
     <OutWrap>
@@ -129,6 +134,10 @@ const handleCategorySelect = useCallback((category, limit, offset) => {
          })}
         </GridWrap>
       </InsideWrap>
+
+      <div className="user-onboarding">
+            <PlusImg src = {plus} onClick={goToWorkUpload} alt="Upload Button"/>
+        </div>
 
       <PaginationWrap>
         <PaginationButton onClick={() => movePage(pageNumber - 1)} disabled={pageNumber === 1}>
@@ -250,4 +259,17 @@ height: 239px;
        opacity: 0.6;
        cursor: not-allowed;
     }
+  `;
+
+  const PlusImg = styled.img`
+    width: 5%;
+    height: 9%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* 수평 정렬을 오른쪽으로 변경 */
+    justify-content: flex-end; /* 수직 정렬을 아래쪽으로 변경 */
+    position: fixed; /* 위치를 고정 */
+    bottom: 50px; /* 아래쪽 여백을 20px로 설정 */
+    right: 50px; /* 오른쪽 여백을 20px로 설정 */
   `;

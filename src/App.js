@@ -11,11 +11,11 @@ import QuizSelPhoto from './Quiz/Quiztest'
 import QuizReult from './Quiz/Quizresult'
 import Post from './PostUp/Post.js'
 import Home from './Home/homepage.js'
-import Reco from './PostUp/Reco.js'
+import Reco from './PostUp/recommend.js'
 //import Lookup from './Lookup/Images_Lookup.js' // 조회
 import Lookup from './Lookup/Images_Lookup'
 //style={{display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',margin : '0 auto'}}
-import ImageComponent from './ftpexample.js';
+
 
 function App() {
 
@@ -36,7 +36,7 @@ function App() {
 
                 <Route path ='/home' element={<Home />}/>
                 <Route path ='/lookup/:id' element={<Lookup/>}/>
-                <Route path ='/image' element={<ImageComponent />}/>
+                
 
 
             </Routes>

@@ -10,7 +10,7 @@ import Post from './PostUp/Post'
 import Home from './Home/homepage.js'
 import Reco from './PostUp/recommend.js'
 import Lookup from './Lookup/Images_Lookup.js' // 조회
-import Exam from './example.js'
+
 
 function Routing() {
   return (
@@ -29,7 +29,7 @@ function Routing() {
 
             <Route path ='/home' element={<Home />}/>
             <Route path ='/lookup/:id' element={<Lookup/>}/>
-            <Route path ='/upload' element={<Exam />}/>
+            
 
           </Routes>
         </BrowserRouter>

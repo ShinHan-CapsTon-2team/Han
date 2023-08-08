@@ -30,33 +30,43 @@ const getQuizprofile = () => {
 };
 
 
-
+//width: 100%;
+//height: 97.5vh;
 
 
 const QuizTest = () => {
 
     const OutWrap = styled.div`
     width: 100%;
-    height: 100%;
+    height: 97.6vh;
+
     position: relative;
     background: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 `;
 
     const InsideWrap = styled.div`
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     `;
 
     const Img = styled.img`
-        width: 567px;
-        height: 670px;
-        margin-right: 50px;
+    width: 35vw;
+    height: 79vh;
+    margin-right: 50px;
+
+    @media screen and (min-width: 1600px) {
+        width: 35vw;
+        height: 79vh; 
+        margin-right: 80px;
+        
+    };
     `;
 
 
