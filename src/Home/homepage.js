@@ -21,114 +21,6 @@ const categoriesData = [
   { name: '웨딩사진', src: wedding },
   { name: '바디프로필', src: body },
 ];
-
-
-const OutWrap = styled.div`
-      width: 100%;
-      height: 100%;
-      position: relative;
-      background: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  `;
-  
-  const InsideWrap = styled.div`
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-  `;
-
-  const LogoWrap = styled.div`
-  width: 496px;
-  height: 239px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @media screen and (max-height: 864px) {
-    width: 456px; height: 199px; 
-  };
-`;
-  
-const Logo = styled.img`
-width: 354px; height: 239px; 
-
-@media screen and (max-height: 864px) {
-  width: 314px; height: 199px; 
- };
-`  
-  const CategoryWrap = styled.div`
-  
-  `;
-
-  const CategoryImg = styled.img`
-      width: 228.43px;
-      height: 58px;
-      margin-right: 30px;
-
-      @media (min-width: 1920px) and (max-height: 1080px) {
-        width: 256px; 
-        height: 60px; 
-      
-       };
-  `;
-
-  const GridWrap = styled.div`
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 10px;
-    width: 100%;
-    height: 100vh;
-    padding: 20px;
-
-    @media screen and (max-width: 768px) {
-    /* 뷰포트 너비가 768px 이하인 경우에 적용할 스타일 */
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-    }
-
-    @media screen and (max-width: 480px) {
-    /* 뷰포트 너비가 480px 이하인 경우에 적용할 스타일 */
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    }
-  `;
-  
-  const GridDiv = styled.div`
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-      overflow: hidden;
-  `;
-  
-  const GridImg = styled.img`
-      width: 100%;
-      height: 100%;
-      border-radius: 10px; 
-      object-fit: cover;
-  `;
-
-  const PaginationWrap = styled.div`
-      margin-top: 20px;
-  `;
-
-  const PaginationButton = styled.button`
-      margin: 0 5px;
-      padding: 8px 16px;
-      border: 1px solid #ccc;
-      background-color: white;
-      cursor: pointer;
-
-      &:disabled {
-       opacity: 0.6;
-       cursor: not-allowed;
-    }
-  `;
   
 
 const Homepage = () => {
@@ -251,3 +143,111 @@ const handleCategorySelect = useCallback((category, limit, offset) => {
 };
 
 export default Homepage;
+
+const OutWrap = styled.div`
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  `;
+  
+  const InsideWrap = styled.div`
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  `;
+
+  const LogoWrap = styled.div`
+  width: 496px;
+  height: 239px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (max-height: 864px) {
+    width: 456px; height: 199px; 
+  };
+`;
+  
+const Logo = styled.img`
+width: 354px; 
+height: 239px; 
+
+@media screen and (max-height: 864px) {
+  width: 314px; height: 199px; 
+ };
+`  
+  const CategoryWrap = styled.div`
+  
+  `;
+
+  const CategoryImg = styled.img`
+      width: 228.43px;
+      height: 58px;
+      margin-right: 30px;
+
+      @media (min-width: 1920px) and (max-height: 1080px) {
+        width: 256px; 
+        height: 60px; 
+      
+       };
+  `;
+
+  const GridWrap = styled.div`
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+
+    @media screen and (max-width: 768px) {
+    /* 뷰포트 너비가 768px 이하인 경우에 적용할 스타일 */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    }
+
+    @media screen and (max-width: 480px) {
+    /* 뷰포트 너비가 480px 이하인 경우에 적용할 스타일 */
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    }
+  `;
+  
+  const GridDiv = styled.div`
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+  `;
+  
+  const GridImg = styled.img`
+      width: 100%;
+      height: 100%;
+      border-radius: 10px; 
+      object-fit: cover;
+  `;
+
+  const PaginationWrap = styled.div`
+      margin-top: 20px;
+  `;
+
+  const PaginationButton = styled.button`
+      margin: 0 5px;
+      padding: 8px 16px;
+      border: 1px solid #ccc;
+      background-color: white;
+      cursor: pointer;
+
+      &:disabled {
+       opacity: 0.6;
+       cursor: not-allowed;
+    }
+  `;
