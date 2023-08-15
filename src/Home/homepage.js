@@ -1,157 +1,18 @@
-//import React, { useState, useEffect } from 'react';
-//import { Link, useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
 import React, { useCallback, useEffect, useState } from 'react';
-//import React, { useEffect } from 'react';
-//import { useSearchParams } from 'react-router-dom';
 
 import logo from '../Images/imagelogo.png';
-import family from '../Images/image 13.png';
-import pet from '../Images/image 10.png';
-import profile from '../Images/image 12.png';
-import wedding from '../Images/image 11.png';
-import body from '../Images/image 9.png';
-import styled from "styled-components";
+import styled from 'styled-components';
 import plus from '../Images/plus.png';
 
-
 const categoriesData = [
-  { name: '가족사진', src: family },
-  { name: '반려동물', src: pet },
-  { name: '증명사진', src: profile },
-  { name: '웨딩사진', src: wedding },
-  { name: '바디프로필', src: body },
+  { name: '바디프로필'},
+  { name: '반려동물' },
+  { name: '가족사진' },
+  { name: '증명사진' },
+  { name: '웨딩사진' },
 ];
-  
 
-const Homepage = () => {
-  const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('가족사진');
-  const [pageNumber, setPageNumber] = useState(1);
-  const limit = 10; // 한 페이지당 이미지 수 설정
- 
-  
-
-const handleCategorySelect = useCallback((category, limit, offset) => {
-  //const queryString = new URLSearchParams({ category }).toString();
-  const queryString = new URLSearchParams({
-    category,
-    limit,
-    offset,
-  }).toString();
-
-  console.log('Category value:', category);
-  
-  
-  fetch(`http://localhost:4000/api/home/${category}?${queryString}`) // 요청
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json(); // 반환
-  })
-  .then((data) => {
-    setUsers(data); // 데이터 저장
-    console.log(data); // 받아온 데이터를 콘솔에 출력하거나 원하는 로직으로 처리합니다.
-    navigate(`/home?${queryString}`);
-    setSelectedCategory(category);
-  })
-  .catch((error) => {
-    // 오류 처리
-    console.error(error);
-  });
-  
- }, [navigate]);
-
-
-  useEffect(() => {
-    //컴포넌트가 마운트될 때 '가족사진' 데이터를 불러옵니다
-    //handleCategorySelect('가족사진');
-    const initialOffset = (pageNumber - 1) * limit;
-    handleCategorySelect(selectedCategory, limit, initialOffset);
-    
-  }, [handleCategorySelect, selectedCategory, pageNumber, limit]); 
-
-  const handleGohomeClick = () => {
-  handleCategorySelect('가족사진');
-  navigate('/home');
-  
-  };
-
-
-    const handleClick = (id) => {
-     console.log('Clicked with id:', id); // 확인용
-      if (id !== undefined) {
-        
-        navigate(`/lookup/${id}`);
-      } else {
-       console.error('Invalid id:', id);
-     }
-    };
-
-  
-   
-    const movePage = (pageNumber) => {
-      const newPageNumber = Math.max(1, pageNumber);
-      setPageNumber(newPageNumber);
-      const offset = (newPageNumber - 1) * limit;
-      handleCategorySelect(selectedCategory, limit, offset);
-    };
-
-      const goToWorkUpload = () => {
-        navigate('/post');
-      };
-
-  
-  return (
-    <OutWrap>
-      <InsideWrap>
-      <LogoWrap>
-        <Logo src={logo} alt='' onClick={handleGohomeClick}/>
-      </LogoWrap>
-        <CategoryWrap>
-          {categoriesData&&categoriesData.map((category, index) => (
-            <CategoryImg
-              key={category.name || index}
-              src={category.src}
-              alt=''
-              onClick={() => handleCategorySelect(category.name)}
-            />
-          ))}
-        </CategoryWrap>
-
-        
-        <GridWrap>
-         {users && users.map((user) => {
-          const imageUrl = user.image; // 이미지 URL 사용
-          //console.log("url:", imageUrl);
-          return (
-            <GridDiv key={user.id}>
-             <GridImg src={imageUrl} onClick={() => handleClick(user.id)} alt="사진" />
-           </GridDiv>
-          );
-         })}
-        </GridWrap>
-      </InsideWrap>
-
-      <div className="user-onboarding">
-            <PlusImg src = {plus} onClick={goToWorkUpload} alt="Upload Button"/>
-        </div>
-
-      <PaginationWrap>
-        <PaginationButton onClick={() => movePage(pageNumber - 1)} disabled={pageNumber === 1}>
-          이전
-        </PaginationButton>
-        <PaginationButton onClick={() => movePage(pageNumber + 1)} disabled={!users || users.length === 0}>
-          다음
-        </PaginationButton>
-      </PaginationWrap>
-    </OutWrap>
-  );
-};
-
-export default Homepage;
 
 const OutWrap = styled.div`
       width: 100%;
@@ -162,6 +23,27 @@ const OutWrap = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      * {
+      font-size: 33px;
+    }
+    /* mobile 규격 */
+    @media screen and (max-width: 540px){
+      * {
+      font-size: 25px;
+    }
+        
+    }
+    /* ss 데스크 */
+  @media screen and (min-width: 1024px){
+   *{
+    font-size: 29px;
+   } 
+  }
+    @media screen and (min-width: 1700px) {
+      * {
+        font-size: 39px;
+      }
   `;
   
   const InsideWrap = styled.div`
@@ -172,41 +54,63 @@ const OutWrap = styled.div`
   `;
 
   const LogoWrap = styled.div`
-  width: 496px;
-  height: 239px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%; 
+//width: 30vw; 
+height: 26vh;
+ // text-align: center;
+display: flex;
+//flex-direction: row;
+align-items: center;
+justify-content: center;
 
-  @media screen and (max-height: 864px) {
-    width: 456px; height: 199px; 
-  };
+
+@media screen and (min-height: 900px) {
+    //width: 32vw; 
+    width: 100%;
+    height: 29vh;
+};
 `;
+
+
   
 const Logo = styled.img`
-width: 354px; 
-height: 239px; 
+width: 29vw; 
+height: 25vh;
+//margin: 0 auto;
+text-align: center;
+width: 31vw; 
+    height: 28vh;
 
-@media screen and (max-height: 864px) {
-  width: 314px; height: 199px; 
- };
-`  
-  const CategoryWrap = styled.div`
+
+/* tablet 규격 */
+        @media screen and (max-width: 1023px){
+            
+        }
+
+        /* mobile 규격 */
+        @media screen and (max-width: 540px){
+          width: 60vw; 
+            height: 20vh; 
+        }
+        /* s 데스크 */
+        @media screen and (min-width: 1024px){
+            
+        }
+        /* l 데스크 */
+        @media screen and (min-width: 1700px){
+            
+        }
+`;
+
+ 
+const CategoryWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap; /* 줄바꿈을 허용하여 가로 공간에 맞게 정렬될 수 있도록 설정 */
+  justify-content: center; /* 공간을 균등하게 분배하여 가로로 정렬 */
+  align-items: center; /* 수직 가운데 정렬 (선택 사항) */
+  `;
+
   
-  `;
-
-  const CategoryImg = styled.img`
-      width: 228.43px;
-      height: 58px;
-      margin-right: 30px;
-
-      @media (min-width: 1920px) and (max-height: 1080px) {
-        width: 256px; 
-        height: 60px; 
-      
-       };
-  `;
 
   const GridWrap = styled.div`
     display: grid;
@@ -273,3 +177,230 @@ height: 239px;
     bottom: 50px; /* 아래쪽 여백을 20px로 설정 */
     right: 50px; /* 오른쪽 여백을 20px로 설정 */
   `;
+  
+
+const Homepage = () => {
+  const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+  //데이터 불러오는 
+  const [selectedCategory, setSelectedCategory] = useState('가족사진');
+  // 버튼
+  const [selectCategory, setSelectCategory] = useState('가족사진');
+  
+  const [pageNumber, setPageNumber] = useState(1);
+  const limit = 10; // 한 페이지당 이미지 수 설정
+  const [offset, setOffset] = useState(0); //offset 초기값
+ 
+  //버튼 
+const selectCate = (categoryName) => {
+  setSelectCategory(categoryName);
+};
+
+const handleCategorySelect = useCallback((category, limit, offset) => {
+  
+  const queryString = new URLSearchParams({
+    category,
+    limit,
+    offset,
+  }).toString();
+
+  console.log('Category value:', category);
+  console.log('offset: ', offset);
+  
+  fetch(`http://localhost:4000/api/home/${category}?${queryString}`) // 요청
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); // 반환
+  })
+  .then((data) => {
+    setUsers(data); // 데이터 저장
+    //console.log(data); // 받아온 데이터를 콘솔에 출력하거나 원하는 로직으로 처리합니다.
+    setSelectedCategory(category);
+    navigate(`/home?${queryString}`);
+    
+  })
+  .catch((error) => {
+    // 오류 처리
+    console.error(error);
+  });
+  
+ }, [navigate]);
+
+
+  useEffect(() => {
+    //컴포넌트가 마운트될 때 '가족사진' 데이터를 불러옵니다
+  handleCategorySelect(selectedCategory, limit, offset);
+  }, [selectedCategory, offset]); 
+
+
+  // page
+
+  // landing page
+  const handleGoLandingClick = () => {
+    navigate('/');
+    };
+    
+  // lookup page
+  const handleClick = (id) => {
+    console.log('Clicked with id:', id); // 확인용
+    if (id !== undefined) {
+      
+      navigate(`/lookup/${id}`);
+    } else {
+      console.error('Invalid id:', id);
+    }
+  };
+
+    // 다음페이지
+    const movePage = (newPageNumber) => {
+      //const newPageNumber = Math.max(1, pageNumber);
+      
+      const newOffset = (newPageNumber - 1) * limit;
+      setPageNumber(newPageNumber);
+      setOffset(newOffset);
+    };
+
+    // 이전페이지
+    const handleGoToPreviousPage = () => {
+      const newPageNumber = pageNumber - 1;
+      if (newPageNumber >= 1) {
+        const newOffset  = (newPageNumber - 1) * limit;
+        setPageNumber(newPageNumber);
+        setOffset(newOffset);
+        handleCategorySelect(selectedCategory, limit, newOffset );
+      }
+    };
+
+    // 카테고리 클릭할 때마다 초기화
+    const handleCategoryClick = (newCategory) => {
+      const newOffset = 0; // 카테고리 클릭 시 offset 초기화
+      
+      setSelectedCategory(newCategory);
+      setOffset(newOffset);
+      movePage(1); // 첫 페이지로 이동
+    };
+
+    const goToWorkUpload = () => {
+      navigate('/post');
+    };
+
+
+  
+  return (
+    <OutWrap>
+      <InsideWrap>
+        {/* 로고 */}        
+        <LogoWrap>                
+            <Logo src={logo} alt='' onClick={handleGoLandingClick}/>
+        </LogoWrap>
+
+
+        <CategoryWrap>
+          {categoriesData&&categoriesData.map((category, index) => (
+            <ButtonTwo  
+            key={index}
+            isselected={selectCategory === category.name ? 'true' : 'false'}
+            onClick={() => {
+              handleCategoryClick(category.name);
+              selectCate(category.name);
+            }}>
+            {category.name }
+            </ButtonTwo>
+          ))}
+        </CategoryWrap>
+
+        
+        <GridWrap>
+         {users && users.map((user) => {
+          const imageUrl = user.image; // 이미지 URL 사용
+          //console.log("url:", imageUrl);
+          return (
+            <GridDiv key={user.id}>
+             <GridImg src={imageUrl} onClick={() => handleClick(user.id)} alt="사진" />
+           </GridDiv>
+          );
+         })}
+        </GridWrap>
+      </InsideWrap>
+
+      <div className="user-onboarding">
+            <PlusImg src = {plus} onClick={goToWorkUpload} alt="Upload Button"/>
+        </div>
+
+      <PaginationWrap>
+        <PaginationButton onClick={handleGoToPreviousPage} disabled={pageNumber === 1}>
+          이전
+        </PaginationButton>
+        <PaginationButton onClick={() => movePage(pageNumber + 1)} disabled={!users || users.length < limit}>
+          다음
+        </PaginationButton>
+      </PaginationWrap>
+    </OutWrap>
+  );
+};
+
+export default Homepage;
+
+const Radius = styled.button`
+//border: 3px #3A76EF solid;
+
+padding: 20px;
+word-wrap: break-word;
+border-radius: 40px;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+//margin-top: 20px;
+border:none;
+`;
+
+// 버튼투
+const ButtonTwo = styled(Radius)`
+  //background: ${({ isSelected }) => isSelected ? '#5D6BB4' : '#798BE6'};
+  background: ${({ isselected }) => (isselected === 'true' ? '#5D6BB4' : '#798BE6')};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  cursor: pointer;
+  color: white;
+  //flex-wrap: wrap;
+  width:17vw;
+  height: 7vh; 
+  
+
+  
+  /* tablet 규격 */
+  @media screen and (max-width: 1023px){
+      
+  }
+  
+
+  /* mobile 규격 */
+  @media screen and (max-width: 540px){
+    width:46vw;
+    height: 7vh; 
+    margin-right:6px;
+    margin-bottom:10px;
+  }
+
+  /* ss 데스크 */
+  @media screen and (min-width: 1024px){
+    width:18.5vw;
+    margin-right:6px;
+  }
+  /* s 데스크 */
+  @media screen and (min-width: 1210px){
+      
+  }
+  @media screen and (min-width: 1700px) {
+    width:15vw;
+    height: 7vh; 
+    margin-right:25px;
+  }
+    
+  };
+ `;
+

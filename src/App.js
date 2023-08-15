@@ -14,6 +14,7 @@ import Home from './Home/homepage.js'
 import Reco from './PostUp/recommend.js'
 //import Lookup from './Lookup/Images_Lookup.js' // 조회
 import Lookup from './Lookup/Images_Lookup'
+import Update from './Lookup/update'
 //style={{display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',margin : '0 auto'}}
 
 
@@ -35,7 +36,8 @@ function App() {
                 <Route path ='/quizresult' element={<QuizReult />}/>
 
                 <Route path ='/home' element={<Home />}/>
-                <Route path ='/lookup/:id' element={<Lookup/>}/>
+                <Route path ='/lookup/:id' element={<Lookup />}/>
+                <Route path ='/update/:id' element={<Update />}/>
                 
 
 
