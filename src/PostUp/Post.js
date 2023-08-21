@@ -28,10 +28,6 @@ function PostEx() {
     const [previewImage, setPreviewImage] = useState(null); // 미리보기 이미지 URL 상태
     const [prediction, setPrediction] = useState(null);
     const [selectedClass, setSelectedClass] = useState(0); // 선택한 클래스의 인덱스
-
-    const [password, setPassword] = useState('');
-    const [passwordMessage, setPasswordMessage] = useState('');
-    const [isPassword, setIsPassword] = useState(false);
    
     const classLabels = [
       '바디프로필',
@@ -108,11 +104,6 @@ function PostEx() {
       };
 
     const handleSubmit = () => {
-      if (!password) {
-        alert('비밀번호를 입력해주세요.');
-        return;
-    }
-
         const data = {
         title,
         description,
@@ -120,7 +111,6 @@ function PostEx() {
         category,
         name,
         profile,
-        password, // 비밀번호 추가 
         //created_at : getCurrentTime(),
         };
         console.log(data.title);
@@ -179,22 +169,6 @@ function PostEx() {
       setPreviewImage(null);
     }
   };
- 
-  // 비밀번호 유효성
-  const onChangePassword = useCallback((e) => {
-    const passwordRegex = /^[a-zA-Z0-9]{6,12}$/;
-    ;
-    const passwordCurrent = e.target.value;
-    setPassword(passwordCurrent);
-  
-    if (!passwordRegex.test(passwordCurrent)) {
-      setPasswordMessage('숫자 또는 영문자 조합으로 6자리 이상 12자리 미만');
-      setIsPassword(false);
-    } else {
-      setPasswordMessage('');
-      setIsPassword(true);
-    }
-  }, []);
 
     return (
         
@@ -208,76 +182,44 @@ function PostEx() {
                     <InLayoutOne>  
                         <Content>
 
-                            <One> {/*제목*/}
-                                <SmallWrap>
-                                    <InputSmall
+                        <One> {/*제목*/}
+                                <WrapAuto>
+                                    <InputBasic
                                         type="text"
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
                                         placeholder="제목"
                                     />
-                                </SmallWrap>
+                                </WrapAuto>
                             </One>
                             
-                            <Em>{/*이름 , 비밀번호 */}
-                              <Two style={{marginRight:20 ,flex:1}}>{/*이름 */}
-                                  <TwoWrap>
-                                      <InputSmall 
-                                          type="text"
-                                          value={name}
-                                          onChange={(e) => setName(e.target.value)}
-                                          placeholder="이름"
-                                      />
-                                  </TwoWrap>
-                              </Two>
-
-                              <Two style={{flex:1}}>{/*비밀번호  */}
-                                <TwoWrap>
-                                    <InputSmall
-                                        type="password"
-                                        value={password}
-                                        onChange={(e) => {
-                                          onChangePassword(e); // 비밀번호 유효성 검사 실행
-                                          setPassword(e.target.value); // 입력된 비밀번호 업데이트
-                                        }}
-                                        placeholder="비밀번호"
-                                        
-                                    />
-                                    
-                                </TwoWrap>
-                                {password.length > 0 && (
-                                          <span className={`message ${isPassword ? 'success' : 'error'}`} style={{fontSize:33,color:'red'}}>{passwordMessage}</span>
-                                          )}
-                              </Two>
+                            <Two>{/*이름 */}
                               
-                            </Em>
+                              <WrapAuto>
+                                  <InputBasic 
+                                      type="text"
+                                      value={name}
+                                      onChange={(e) => setName(e.target.value)}
+                                      placeholder="이름"
+                                  />
+                              </WrapAuto>
+
+                            </Two>
                             
 
-                            <Three> {/*소개 */}
-                                <ProfileWrap>
-                                    <ProfileArea 
-                                    //ref={textRef} 길이 조절 수정해야함 
-                                    //onInput={handleResizeHeight}
-                                    value={profile}
-                                    onChange={(e) => setProfile(e.target.value)}
-                                    placeholder="소개 및 커리어"
-                                    />
-                                </ProfileWrap>
-                            </Three>
-
-                            <Four>{/* 설명 */}
+                            <Three>{/* 설명 */}
                                 {/* 드래그 방지 추가하기 */}
-                                <DescriptionWrap>
-                                    <DescriptArea
+                                <WrapPer>
+                                    <TextareaBasic
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                         placeholder="설명" 
                                     />
-                                </DescriptionWrap>
+                                </WrapPer>
                                 
-                            </Four>                                        
-                            
-                            <Five>{/* 이미지 */}
+                            </Three>              
+
+                            <Four>{/* 이미지 */}
                                 {!previewImage && (
                                     <EmptyImg src={upload} alt="upload" />
                                 )} {/*빈 이미지로 사진 올리면 없어짐 */}
@@ -296,7 +238,8 @@ function PostEx() {
                                 {previewImage && 
                                 <SelectImg src={previewImage} alt="Preview" />} 
                                 
-                            </Five>
+                            </Four>                                      
+                          
 
                         </Content>  
                     </InLayoutOne>  
@@ -315,13 +258,13 @@ function PostEx() {
 
                                 <DropContainer>
                                 
-                                    {isMenuOpen && (
+                                {isMenuOpen && (
                                     <DropMenu > {/* 스타일 수정 */}
-                                        <CateMenu onClick={() => handleCategorySelect(classLabels[0])}>{classLabels[0]}</CateMenu>
-                                        <CateMenu onClick={() => handleCategorySelect(classLabels[1])}>{classLabels[1]}</CateMenu>
-                                        <CateMenu onClick={() => handleCategorySelect(classLabels[2])}>{classLabels[2]}</CateMenu>
-                                        <CateMenu onClick={() => handleCategorySelect(classLabels[3])}>{classLabels[3]}</CateMenu>
-                                        <CateMenu onClick={() => handleCategorySelect(classLabels[4])}>{classLabels[4]}</CateMenu>   
+                                        {classLabels.map((label, index) => (
+                                          <CateMenu key={index} onClick={() => handleCategorySelect(label)}>
+                                            {label}
+                                          </CateMenu>
+                                        ))}    
                                     </DropMenu>
                                     )}
 
@@ -334,9 +277,7 @@ function PostEx() {
                                 <ButtonTwo>
                                     
                                     <Menu
-                                      onClick={handleSubmit}
-                                     
-                                    >
+                                      onClick={handleSubmit}>
                                     업로드  
                                     </Menu>
                                 </ButtonTwo>
@@ -365,34 +306,59 @@ flex-direction: column;
 // justify-content: center;
 align-items: center;
 
+* {
+  font-size: 33px;
+}
+/* mobile 규격 */
+@media screen and (max-width: 540px){
+  * {
+  font-size: 27px;
+}
+    
+}
+@media screen and (min-width: 1700px) {
+  * {
+    font-size: 45px;
+  }
 `;
 
 const InOutWrap = styled.div`
-text-align: center;
+//text-align: center;
 display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
 `;
 
-
-
-
 const Center = styled.div`
 //width: 65vw;
-text-align: center;
+//text-align: center;
 display: flex;
 flex-direction: column;
 align-items: center;
 `;
 
 const InLayoutOne = styled.div`
-text-align:center;
 width:65vw;
 
-@media screen and (min-width: 1700px) {
-    width: 75vw;
-};
+/* tablet 규격 */
+        @media screen and (max-width: 1023px){
+            
+        }
+
+        /* mobile 규격 */
+        @media screen and (max-width: 540px){
+          width: 80vw;
+        }
+        /* s 데스크 */
+        @media screen and (min-width: 1024px){
+            
+        }
+        /* l 데스크 */
+        @media screen and (min-width: 1700px){
+          width: 75vw;
+        }
+
 `;
 
 const InLayoutTwo = styled(InLayoutOne)`
@@ -400,8 +366,12 @@ display: flex;
 width:65vw;
 height:12vh;
 align-items: center;
-//justify-content: center;
-
+margin-bottom:20px;
+/* mobile 규격 */
+  @media screen and (max-width: 540px){
+    width: 80vw;
+    height:19vh;
+  }
 @media screen and (min-width: 1700px) {
     width: 75vw;
     height:13vh;
@@ -409,7 +379,6 @@ align-items: center;
 `;
 
 const Content = styled.div`
-//width:65vw;
 display: flex;
 flex-direction: column;
 `;
@@ -428,56 +397,49 @@ margin-top: 20px;
 };
 `;
 
-
-// 색깔 탁하게 하는 주범 이 새기임 opacity: 0.90;
 const One = styled(ContentRadius)`
 display: flex;
 align-items: center;
+height:auto;
+
 `;
 
 const Two = styled(ContentRadius)`
-display: flex;
-align-items: center;
-`;
-const Em = styled.div`
-display: flex;
+  display: flex;
   //flex-wrap: wrap; /* 줄바꿈을 허용하여 가로 공간에 맞게 정렬될 수 있도록 설정 */
-  justify-content: space-between; /* 공간을 균등하게 분배하여 가로로 정렬 */
-  align-items: center; /* 수직 가운데 정렬 (선택 사항) *`
+  align-items: center; /* 수직 가운데 정렬 (선택 사항) *  
+`;
+
 
 const Three = styled(ContentRadius)`
-height: auto;
-flex:1;
-`;
-
-const Four = styled(ContentRadius)`
 height: 25vh;
 `;
 
-const Five = styled(ContentRadius)`
+const Four = styled(ContentRadius)`
 position: relative;
 overflow: hidden;
-text-align: center;
+//text-align: center;
 height:75vh;
 `;
 
 const Left = styled.div`
-width: 65%;
 display: flex;
 justify-content: center;
+margin-left:auto;
 `;
 
 const Right = styled.div`
 display: flex;
 flex-direction: column;
 margin-left: auto;
-margin-right:10px;
-//flex:1
+
+/* s 데스크 */
+@media screen and (min-width: 1024px){
+  margin-right:auto;
+}
 `;
 
 const Radius = styled.button`
-//border: 3px #3A76EF solid;
-
 padding: 20px;
 word-wrap: break-word;
 border-radius: 40px;
@@ -488,36 +450,19 @@ border:none;
 
 `;
 const Buttons = styled.div`
-  text-align: center;
+  //text-align: center;
   display: flex;
-  justify-items: space-between;
+  //justify-items: space-between;
   flex-direction: row;
   width: 100%;
+
+  /* tablet 규격 */
+  @media screen and (max-width: 1023px){
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 `;
-//파일 찾기 
-
-const FindImg = styled(Radius)` 
-  background: #798BE6;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-
-  display: flex;
-  justify-content: center;
-  align-items:center;
-  
-  width:18.5vw;
-  height: 7.5vh;
-  // 여기 적응된다고 . . .왜 다른 곳은 안되는거고 여긴 
-  @media screen and (min-height: 950px) {
-    width:18vw;
-    height: 8vh; 
-    
-   // };
-  
-  
-`;
-
 
 const ButtonOne = styled(Radius)`
 background: #798BE6;
@@ -530,96 +475,96 @@ position: relative;
 width: 40vw;
 height: 7vh;
 
+/* mobile 규격 */
+@media screen and (max-width: 540px){
+  width:80vw;
+  height: 7vh; 
+}
 @media screen and (min-width: 1700px) {
     width: 50vw;
     height: 7.5vh;
 };
 
 `;
-
+// 버튼투
 const ButtonTwo = styled(Radius)`
-background: #798BE6;
-display: flex;
-align-items: center;
-justify-content: center;
+  background: #798BE6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-position: relative;
-cursor: pointer;
+  position: relative;
+  cursor: pointer;
+
   width:18vw;
   height: 7vh; 
-  font-size: 33px;
+  color: white;
 
+  /* mobile 규격 */
+  @media screen and (max-width: 540px){
+    width:41vw;
+    height: 7vh; 
+
+  }
+
+  /* s 데스크 */
+  @media screen and (min-width: 1024px){
+      
+  }
   @media screen and (min-width: 1700px) {
     width:18vw;
     height: 7.5vh; 
   };
  `;
+//파일 찾기 
 
+const FindImg = styled(ButtonTwo)` 
+  position: absolute;
+  bottom: 30px;
+  right: 10px;
+
+  /* tablet 규격 */
+  @media screen and (max-width: 1023px){
+    bottom: 20px;
+  }
+
+`;
  // span 
 const Menu = styled.span`
 z-index: 2;
 color: white;
-
 position: absolute;
-font-weight: 500;
-
-font-size: 33px;
-over-flow:hidden;
-
-@media screen and (min-height: 950px) {
-  
-  font-size: 45px;
-  
-  };
 `;
 
 const Area = styled.div`
 display: flex;
 align-items: center;
 width: 100%;
-border-radius: 31px;
 overflow: hidden; 
 `;
 
-const SmallWrap = styled(Area)`
+const WrapAuto = styled(Area)`
 height: auto;
 
 `;
-const TwoWrap = styled(Area)`
-height: auto;
-
-`;
-
-const DescriptionWrap = styled(Area)`
+const WrapPer = styled(Area)`
 height: 100%;
-
 `;
+
 const inputStyle = {
 color: 'black',
-fontSize: 35,
 fontFamily: 'Inter',
-fontWeight: '400',
 border: 'none',
 outline: 'none',
-width: '100%',
-
-    '@media screen and (min-height: 950px)': {
-        fontSize: 40,
-    },
+width: '100%'
 };
 
-const InputSmall = styled.input`
+const InputBasic = styled.input`
 ${inputStyle}
 height: 6vh;
 `;
 
-
-const DescriptArea = styled.textarea`
-${inputStyle}
-height: 100%;
-`;
-
-const ProfileArea = styled.textarea`
+const TextareaBasic = styled.textarea`
 ${inputStyle}
 height: 100%;
 `;
@@ -627,17 +572,29 @@ height: 100%;
 const EmptyImg = styled.img`
 width: 200px;
 height: 200px;
-width: 150px;
-height: 150px;
 position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
+/* tablet 규격 */
+  @media screen and (max-width: 1023px){
+      
+  }
 
-@media screen and  (min-height: 950px){
-    width: 200px;
-    height: 200px;
-};
+  /* mobile 규격 */
+  @media screen and (max-width: 540px){
+    width: 120px;
+    height: 120px;
+  }
+  /* s 데스크 */
+  @media screen and (min-width: 1024px){
+    
+  }
+  /* l 데스크 */
+  @media screen and (min-width: 1700px){
+      
+  }
+
 `;
 
 const FileBox = styled.input`
@@ -653,7 +610,7 @@ const SelectImg = styled.img`
 const DropContainer = styled.div`
   z-index: 2;
   color: white;
-  font-size: 23px;
+  //font-size: 33px;
   position: absolute;
   align-items: center;
 `;
@@ -662,38 +619,56 @@ const DropContainer = styled.div`
 const DropMenu = styled.div` 
   position: relative;
   background-color: #798BE6;
-  border: 1px solid #ccc;
+  //border: 1px solid #ccc;
   padding: 10px;
   border-radius: 31px;
   z-index: 2;
 
-  text-align: center;
+  //text-align: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  top: -157px;
+  top: -137px;
 
-  
 
-  @media screen and (min-height: 950px){
-    top: -167px;
-    };
+  /* tablet 규격 */
+        @media screen and (max-width: 1023px){
+            
+        }
 
-    
-  @media screen and (max-width: 1950px) {
-    width:40vw;
-  };
-  @media screen and (max-width: 1600px) {
-    width:25vw;
-  };
-  
+        /* mobile 규격 */
+        @media screen and (max-width: 540px){
+          width:45vw;
+          top: -147px;
+        }
+        /* s 데스크 */
+        @media screen and (min-width: 1024px){
+          width:25vw;
+        }
+        /* l 데스크 */
+        @media screen and (min-width: 1700px){
+          width:40vw;
+          top: -177px;
+        }
 `;
 
 const CateMenu = styled.div` 
-  font-size: 29px;
-  font-weight: 550;
+  font-size: 25px;
   margin-top:5px;
-`;
 
+  /* tablet 규격 */
+        @media screen and (max-width: 1023px){
+            
+        }
 
-const ProfileWrap = styled(Area)`
-height:100%;
+        /* mobile 규격 */
+        @media screen and (max-width: 540px){
+            
+        }
+        /* s 데스크 */
+        @media screen and (min-width: 1024px){
+          
+        }
+        /* l 데스크 */
+        @media screen and (min-width: 1700px){
+          font-size: 30px;
+        }
 `;

@@ -1,9 +1,10 @@
 import { useNavigate  } from 'react-router-dom';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import logo from '../Images/imagelogo.png';
+//import logo from '../Images/imagelogo.png';
 import styled from 'styled-components';
 import plus from '../Images/plus.png';
+import HomeLogo from '../Component/HeaderHome'
 
 const categoriesData = [
   { name: '바디프로필'},
@@ -12,158 +13,6 @@ const categoriesData = [
   { name: '증명사진' },
   { name: '웨딩사진' },
 ];
-
-
-const OutWrap = styled.div`
-      width: 100%;
-      height: 100%;
-      position: relative;
-      background: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      * {
-      font-size: 33px;
-    }
-    /* mobile 규격 */
-    @media screen and (max-width: 540px){
-      * {
-      font-size: 25px;
-    }
-        
-    }
-    /* ss 데스크 */
-  @media screen and (min-width: 1024px){
-   *{
-    font-size: 29px;
-   } 
-  }
-    @media screen and (min-width: 1700px) {
-      * {
-        font-size: 39px;
-      }
-  `;
-  
-  const InsideWrap = styled.div`
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-  `;
-
-  const LogoWrap = styled.div`
-  width: 100%; 
-//width: 30vw; 
-height: 26vh;
- // text-align: center;
-display: flex;
-//flex-direction: row;
-align-items: center;
-justify-content: center;
-
-
-@media screen and (min-height: 900px) {
-    //width: 32vw; 
-    width: 100%;
-    height: 29vh;
-};
-`;
-
-
-  
-const Logo = styled.img`
-width: 29vw; 
-height: 25vh;
-//margin: 0 auto;
-text-align: center;
-width: 31vw; 
-    height: 28vh;
-
-
-/* tablet 규격 */
-        @media screen and (max-width: 1023px){
-            
-        }
-
-        /* mobile 규격 */
-        @media screen and (max-width: 540px){
-          width: 60vw; 
-            height: 20vh; 
-        }
-        /* s 데스크 */
-        @media screen and (min-width: 1024px){
-            
-        }
-        /* l 데스크 */
-        @media screen and (min-width: 1700px){
-            
-        }
-`;
-
- 
-const CategoryWrap = styled.div`
-  display: flex;
-  flex-wrap: wrap; /* 줄바꿈을 허용하여 가로 공간에 맞게 정렬될 수 있도록 설정 */
-  justify-content: center; /* 공간을 균등하게 분배하여 가로로 정렬 */
-  align-items: center; /* 수직 가운데 정렬 (선택 사항) */
-  `;
-
-  
-
-  const GridWrap = styled.div`
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 10px;
-    width: 100%;
-    height: 100vh;
-    padding: 20px;
-
-    @media screen and (max-width: 768px) {
-    /* 뷰포트 너비가 768px 이하인 경우에 적용할 스타일 */
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-    }
-
-    @media screen and (max-width: 480px) {
-    /* 뷰포트 너비가 480px 이하인 경우에 적용할 스타일 */
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    }
-  `;
-  
-  const GridDiv = styled.div`
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-      overflow: hidden;
-  `;
-  
-  const GridImg = styled.img`
-      width: 100%;
-      height: 100%;
-      border-radius: 10px; 
-      object-fit: cover;
-  `;
-
-  const PaginationWrap = styled.div`
-      margin-top: 20px;
-  `;
-
-  const PaginationButton = styled.button`
-      margin: 0 5px;
-      padding: 8px 16px;
-      border: 1px solid #ccc;
-      background-color: white;
-      cursor: pointer;
-
-      &:disabled {
-       opacity: 0.6;
-       cursor: not-allowed;
-    }
-  `;
 
   const PlusImg = styled.img`
     width: 5%;
@@ -188,8 +37,13 @@ const Homepage = () => {
   const [selectCategory, setSelectCategory] = useState('가족사진');
   
   const [pageNumber, setPageNumber] = useState(1);
-  const limit = 10; // 한 페이지당 이미지 수 설정
+  const limit = 20; // 한 페이지당 이미지 수 설정
   const [offset, setOffset] = useState(0); //offset 초기값
+  const [showDescription, setShowDescription] = useState(false);
+
+  const toggleDescription = () => {
+    setShowDescription(!showDescription);
+  };
  
   //버튼 
 const selectCate = (categoryName) => {
@@ -292,9 +146,7 @@ const handleCategorySelect = useCallback((category, limit, offset) => {
     <OutWrap>
       <InsideWrap>
         {/* 로고 */}        
-        <LogoWrap>                
-            <Logo src={logo} alt='' onClick={handleGoLandingClick}/>
-        </LogoWrap>
+        <HomeLogo/>
 
 
         <CategoryWrap>
@@ -342,6 +194,110 @@ const handleCategorySelect = useCallback((category, limit, offset) => {
 };
 
 export default Homepage;
+
+const OutWrap = styled.div`
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      * {
+      font-size: 33px;
+    }
+    /* mobile 규격 */
+    @media screen and (max-width: 540px){
+      * {
+      font-size: 25px;
+    }
+        
+    }
+    /* ss 데스크 */
+  @media screen and (min-width: 1024px){
+   *{
+    font-size: 29px;
+   } 
+  }
+    @media screen and (min-width: 1700px) {
+      * {
+        font-size: 39px;
+      }
+  `;
+  
+  const InsideWrap = styled.div`
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  `;
+
+
+
+const CategoryWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap; /* 줄바꿈을 허용하여 가로 공간에 맞게 정렬될 수 있도록 설정 */
+  justify-content: center; /* 공간을 균등하게 분배하여 가로로 정렬 */
+  align-items: center; /* 수직 가운데 정렬 (선택 사항) */
+  margin-top:20px;
+  `;
+
+  
+
+  const GridWrap = styled.div`
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+
+    @media screen and (max-width: 768px) {
+    /* 뷰포트 너비가 768px 이하인 경우에 적용할 스타일 */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    }
+
+    @media screen and (max-width: 480px) {
+    /* 뷰포트 너비가 480px 이하인 경우에 적용할 스타일 */
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    }
+  `;
+  
+  const GridDiv = styled.div`
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+  `;
+  
+  const GridImg = styled.img`
+      width: 100%;
+      height: 100%;
+      border-radius: 10px; 
+      object-fit: cover;
+  `;
+
+  const PaginationWrap = styled.div`
+      margin-top: 20px;
+  `;
+
+  const PaginationButton = styled.button`
+      margin: 0 5px;
+      padding: 8px 16px;
+      border: 1px solid #ccc;
+      background-color: white;
+      cursor: pointer;
+
+      &:disabled {
+       opacity: 0.6;
+       cursor: not-allowed;
+    }
+  `;
 
 const Radius = styled.button`
 //border: 3px #3A76EF solid;

@@ -1,23 +1,19 @@
 import logo from '../Images/imagelogo.png'
-import photoreco from '../Images/image 20.png'
-import fitphoto from '../Images/image 19.png'
-import gogohome from '../Images/image 18.png'
-import gopostup from '../Images/postup.png'
+
 import { useNavigate } from 'react-router-dom';
 
 import styled from "styled-components";
 
 
-function Re_Landing(){
+function Landing(){
 
-    
     const navigate = useNavigate();
+
     //퀴즈 
     const handleFitPhotoClick = () => {
         navigate('/quizindex');
     };
 
-    
     //홈페이지
     const handleGohomeClick = () => {
         navigate('/home');
@@ -30,18 +26,28 @@ function Re_Landing(){
     const handleUpPhotoClick = () => {
         navigate('/post');
     };
-    //const OutWrap = styled.div``;
 
     const OutWrap = styled.div`
-    width: 100%;
-    height: 100%;
-    position: relative;
+    //width: 100%;
+    //height:100%;
+    //height: 97.6vh;
+    //position: relative;
     background: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
+    width: 80%;
+	min-width: 350px;
+	max-width: 1200px;
+	@media (max-width: 700px) {
+		width: 95%;
+	}
+	@media (max-width: 900px) {
+		width: 90%;
+	}
+	margin: 0 auto;
 `;
 
     const InsideWrap = styled.div`
@@ -49,20 +55,36 @@ function Re_Landing(){
         display: flex;
         flex-direction: column;
         align-items: center;
-
-       
+        width:100%
     `;
 
     const LogoImg = styled.img`
-        width: 55%;
-        height: 60%; /* height 값에 px 단위를 추가하세요 */
-        margin-top: 50px; /* marginTop -> margin-top */
-        margin-bottom: 20px; /* marginBottom -> margin-bottom */
+        margin-top: 50px; 
+        margin-bottom: 20px; 
 
-        @media (min-width: 1920px) and (min-width: 1080px)  {
-            width: 70%;
-            height: 60%;
+
+        /* tablet 규격 */
+        @media screen and (max-width: 1023px){
+            
         }
+
+        /* mobile 규격 */
+        @media screen and (max-width: 540px){
+            margin-top: 100px;
+            width: 85%;
+            height: 200px;
+        }
+        /* s 데스크 */
+        @media screen and (min-width: 1024px){
+            width: 55%;
+            height: 290px;
+        }
+        /* l 데스크 */
+        @media screen and (min-width: 1700px){
+            width: 70%;
+            height: 400px;
+        }
+        
     `;
 
     const ImgWrap = styled.div`
@@ -70,18 +92,62 @@ function Re_Landing(){
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top:20px
     `;
 
-    const Img = styled.img`
-        width: 55%;
-        height: auto;
-        margin-bottom: 16px; /* marginBottom -> margin-bottom */
 
-        @media (min-width: 1920px) and (min-width: 1080px) {
-            width: 70%;
+    const Radius = styled.button`
+    //border: 3px #3A76EF solid;
+    padding: 20px;
+    word-wrap: break-word;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border:none;
+    `;
+
+    const Button = styled(Radius)`
+    background: #798BE6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+
+    
+    
+    margin-bottom:15px;
+
+
+    /* tablet 규격 */
+        @media screen and (max-width: 1023px){
             
         }
-    `;
+
+        /* mobile 규격 */
+        @media screen and (max-width: 540px){
+            width: 88vw;
+            height: 9vh;
+            font-size: 24px;
+            margin-bottom:20px;
+        }
+        /* s 데스크 */
+        @media screen and (min-width: 1024px){
+            width: 44vw;
+            height: 9.6vh;; 
+            
+            font-size: 35px;
+        }
+        /* l 데스크 */
+        @media screen and (min-width: 1700px){
+            width: 40vw;
+            height: 9vh;
+            font-size: 40px;
+            
+        }
+`;
 
 
     
@@ -90,12 +156,14 @@ function Re_Landing(){
 
         <OutWrap>
             <InsideWrap>
+                
                 <LogoImg src={logo} alt=''/>
-                <ImgWrap>
-                    <Img src={photoreco} onClick ={handleUploadPhotoClick} alt='' />
-                    <Img src={fitphoto} alt=''onClick={handleFitPhotoClick}/>
-                    <Img src={gogohome} onClick={handleGohomeClick} alt=''/> 
-                    <Img src={gopostup} onClick={handleUpPhotoClick} alt=''/> {/* 사진 등록 추가 */}
+                
+                <ImgWrap> {/* 말 줄이기 ... fontsize 높여야함  */}
+                    <Button onClick ={handleUploadPhotoClick}>매칭을 통해 추천받기 </Button>
+                    <Button onClick={handleFitPhotoClick}> 맞는 사진 추천받기</Button>
+                    <Button onClick={handleGohomeClick} > 홈페이지 방문하기</Button>
+                    <Button onClick={handleUpPhotoClick} >사진 등록하기 </Button>
                 </ImgWrap>
                 
             </InsideWrap>
@@ -104,4 +172,4 @@ function Re_Landing(){
     );
 }
 
-export default  Re_Landing;
+export default  Landing;
