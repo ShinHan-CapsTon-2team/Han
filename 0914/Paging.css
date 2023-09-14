@@ -1,0 +1,31 @@
+.pagination, .pages.pagination {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .pagination li, .pages.pagination li {
+    display: inline;
+    margin: 0 2px;
+  }
+  
+  .pagination a, .pages.pagination a {
+    color: #000;
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+  }
+  
+  .pagination a:hover, .pages.pagination a:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .pagination .active a, .pages.pagination .active a {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+    cursor: default;
+  }
+  
